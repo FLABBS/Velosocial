@@ -3,11 +3,12 @@ import os
 import datetime
 from math import radians, cos, sin, sqrt, atan2
 
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
     MessageHandler,
+    CallbackQueryHandler,
     filters,
     ConversationHandler,
     ContextTypes,
@@ -47,6 +48,27 @@ class DataStore:
 
     def get_events(self):
         return self.data["events"]
+
+    def get_event(self, event_id: str):
+        return self.data["events"].get(event_id)
+
+    def join_event(self, event_id: str, user_id: str) -> bool:
+        event = self.get_event(event_id)
+        if not event:
+            return False
+        if user_id not in event["participants"]:
+            event["participants"].append(user_id)
+            self.save()
+        return True
+
+    def leave_event(self, event_id: str, user_id: str) -> bool:
+        event = self.get_event(event_id)
+        if not event:
+            return False
+        if user_id in event["participants"]:
+            event["participants"].remove(user_id)
+            self.save()
+        return True
 
 data_store = DataStore()
 
@@ -145,14 +167,32 @@ async def events(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not events_data:
         await update.message.reply_text("Событий пока нет.")
         return
+    for eid, ev in events_data.items():
+        text = f"{ev['route']}\nДата: {ev['date']}\nУчастники: {len(ev['participants'])}"
+        buttons = []
+        if ev.get("chat_link"):
+            buttons.append([InlineKeyboardButton("Чат", url=ev["chat_link"])])
+        user_id = str(update.effective_user.id)
+        if user_id in ev["participants"]:
+            buttons.append([InlineKeyboardButton("Выйти", callback_data=f"leave:{eid}")])
+        else:
+            buttons.append([InlineKeyboardButton("Присоединиться", callback_data=f"join:{eid}")])
+        await update.message.reply_text(
+            text,
+            reply_markup=InlineKeyboardMarkup(buttons) if buttons else None,
+        )
+
+async def myevents(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user_id = str(update.effective_user.id)
+    events_data = data_store.get_events()
     lines = []
     for eid, ev in events_data.items():
-        line = f"{eid}) {ev['route']} — {ev['date']}"
-        if ev.get('chat_link'):
-            line += f"\nЧат: {ev['chat_link']}"
-        lines.append(line)
-    await update.message.reply_text("\n\n".join(lines))
-
+        if user_id in ev["participants"]:
+            lines.append(f"{eid}) {ev['route']} — {ev['date']}")
+    if lines:
+        await update.message.reply_text("\n".join(lines))
+    else:
+        await update.message.reply_text("Вы не участвуете ни в одном событии.")
 
 async def create_event_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text("Опишите маршрут (например, Город А → Город Б):")
@@ -191,6 +231,21 @@ async def create_event_chatlink(update: Update, context: ContextTypes.DEFAULT_TY
     return ConversationHandler.END
 
 
+async def join_or_leave(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    action, eid = query.data.split(":", 1)
+    user_id = str(query.from_user.id)
+    if action == "join":
+        ok = data_store.join_event(eid, user_id)
+        msg = "Вы присоединились к событию." if ok else "Событие не найдено."
+    else:
+        ok = data_store.leave_event(eid, user_id)
+        msg = "Вы покинули событие." if ok else "Событие не найдено."
+    await query.edit_message_reply_markup(reply_markup=None)
+    await query.message.reply_text(msg)
+
+
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text("Действие отменено.")
     return ConversationHandler.END
@@ -198,15 +253,20 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 def main() -> None:
     token = os.environ.get("BOT_TOKEN")
+    if not token and os.path.exists(os.path.join(os.path.dirname(__file__), "token.txt")):
+        with open(os.path.join(os.path.dirname(__file__), "token.txt")) as f:
+            token = f.read().strip()
     if not token:
-        raise RuntimeError("Set BOT_TOKEN environment variable")
+        raise RuntimeError("Set BOT_TOKEN environment variable or create token.txt")
     application = ApplicationBuilder().token(token).build()
 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("profile", profile))
     application.add_handler(CommandHandler("nearby", nearby))
     application.add_handler(CommandHandler("events", events))
+    application.add_handler(CommandHandler("myevents", myevents))
     application.add_handler(MessageHandler(filters.LOCATION, handle_location))
+    application.add_handler(CallbackQueryHandler(join_or_leave))
 
     profile_conv = ConversationHandler(
         entry_points=[CommandHandler("setprofile", setprofile_start)],
