@@ -1,0 +1,4 @@
+Go.Active/telegram_bot/data.json
+Go.Active/telegram_bot/*.db
+.env
+__pycache__/
