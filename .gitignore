@@ -1,1 +1,4 @@
 telegram_bot/data.json
+telegram_bot/*.db
+.env
+__pycache__/

@@ -1,22 +1,34 @@
 # Velosocial Telegram Bot
 
-This bot provides a minimal social network for cyclists. Users can:
+This is a modular Telegram bot for cyclists built with **aiogram** and `aiosqlite`.
+It lets riders create short profiles, share locations and organize group rides.
 
-- Share their location and see nearby riders within 5 km.
-- Create events with a route, date and optional group chat link.
-- Maintain a short profile with a description and contacts.
+## Features
+- Profile management with FSM
+- Nearby events list, creation and participation with inline buttons
+- Simple rate limiting and input validation
+- Async SQLite database
 
-Commands:
+## Development
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Create a `.env` file with `BOT_TOKEN=...` (and optionally `DB_PATH`)
+3. Run the bot:
+   ```bash
+   python -m telegram_bot.app
+   ```
 
-- `/start` – welcome message
-- `/setprofile` – fill your description and contacts
-- `/profile` – show your profile
-- Send location – update coordinates
-- `/nearby` – show riders near you
-- `/create_event` – create a new ride
-- `/events` – list upcoming events with join buttons
-- `/myevents` – your joined rides
+## Project Structure
+- `app.py` – bot startup script
+- `config.py` – environment configuration
+- `db/` – async database layer
+- `handlers/` – command handlers and FSM scenes
+- `utils/` – logger, rate limit and validators
+- `tests/` – example tests
 
-Store your bot token in the `BOT_TOKEN` environment variable or in `token.txt` next to `bot.py`.
-
-Data is stored in a local JSON file (`data.json`). See `bot.py` for details.
+## Running tests
+```
+pytest -q
+```
