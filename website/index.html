@@ -1,209 +1,51 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomMate – сервис совместной аренды</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Beautiful Site</title>
     <style>
-        body{font-family:Arial,Helvetica,sans-serif;color:#212529;line-height:1.6}
-        .bg-dark-purple{background-color:#20214a;color:#fff}
-        .accent{color:#3ac1c8}
-        section{padding:60px 0}
-        table.striped tbody tr:nth-child(odd){background-color:#f5f5f5}
-        .hero{background:linear-gradient(120deg,#20214a 0%,#3ac1c8 100%);color:#fff;padding:100px 0;text-align:center}
-        .hero h1{font-size:3rem;font-weight:bold}
-        .hero p{font-size:1.25rem;margin-bottom:30px}
-        a.nav-link{color:#fff}
-        a.nav-link:hover{color:#3ac1c8}
-        @media print{.btn{display:none}}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 50px 0;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+        }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-dark-purple">
-  <div class="container">
-    <a class="navbar-brand text-white" href="#hero">RoomMate</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#problem">Проблема</a></li>
-        <li class="nav-item"><a class="nav-link" href="#mission">Миссия</a></li>
-        <li class="nav-item"><a class="nav-link" href="#product">Продукт</a></li>
-        <li class="nav-item"><a class="nav-link" href="#market">Рынок</a></li>
-        <li class="nav-item"><a class="nav-link" href="#advantages">Преимущества</a></li>
-        <li class="nav-item"><a class="nav-link" href="#roadmap">План</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<section id="hero" class="hero">
-  <div class="container">
-    <h1>RoomMate</h1>
-    <p>Онлайн‑сервис подбора сожителей и проверки арендодателей</p>
-    <p class="fw-light">Находите соседей и жильё удобно и безопасно</p>
-    <a href="#" class="btn btn-light">Скачать презентацию</a>
-    <div class="mt-4">Удобство • Безопасность • Экономия • AI‑подбор</div>
-  </div>
-</section>
-<section id="problem">
-  <div class="container">
-    <h2>Проблема и решение</h2>
-    <p>Поиск честного арендодателя и подходящего соседа часто превращается в лотерею. Объявления не проверены, отзывы могут быть фейковыми, возникают риски конфликтов и мошенничества.</p>
-    <h3 class="h5 mt-4">Наше решение</h3>
-    <ul>
-      <li>Интеллектуальный подбор соседей по предпочтениям и образу жизни.</li>
-      <li>Верификация личности через государственные сервисы и проверка собственности жилья.</li>
-      <li>Цифровой договор и escrow‑платежи для защиты сторон.</li>
-      <li>Система отзывов и рейтингов — прозрачная репутация пользователей.</li>
-    </ul>
-  </div>
-</section>
-<section id="mission" class="bg-light">
-  <div class="container">
-    <h2>Цели и миссия</h2>
-    <p>Миссия RoomMate — сделать рынок аренды прозрачным, безопасным и удобным для арендаторов и наймодателей.</p>
-    <ul>
-      <li>Создать платформу для доверительной совместной аренды.</li>
-      <li>Обеспечить экономию за счёт разделения платы и исключить мошенничество.</li>
-      <li>Внедрить AI и проверки личности для повышения доверия.</li>
-    </ul>
-  </div>
-</section>
-<section id="product">
-  <div class="container">
-    <h2>Что умеет RoomMate</h2>
-    <table class="table striped">
-      <tbody>
-        <tr><td>Верификация пользователей (паспорт, госуслуги)</td></tr>
-        <tr><td>AI‑подбор сожителей по совместимости</td></tr>
-        <tr><td>Проверка арендодателей и репутационные рейтинги</td></tr>
-        <tr><td>Цифровой договор и escrow‑платежи</td></tr>
-        <tr><td>Карта жилья и фильтры по интересам</td></tr>
-        <tr><td>Чаты и быстрые коммуникации</td></tr>
-        <tr><td>Поддержка B2B: вузы и коливинги</td></tr>
-      </tbody>
-    </table>
-    <h3 class="h5 mt-4">Сценарий для арендодателя</h3>
-    <ol>
-      <li>Размещает объявление и проходит верификацию.</li>
-      <li>Получает отклики проверенных соискателей.</li>
-      <li>Заключает цифровой договор и получает оплату через escrow.</li>
-    </ol>
-    <h3 class="h5">Сценарий для соискателя</h3>
-    <ol>
-      <li>Создаёт анкету, проходит проверку личности.</li>
-      <li>Получает предложения от совместимых соседей.</li>
-      <li>Подписывает договор и заселяется с гарантией безопасного платежа.</li>
-    </ol>
-  </div>
-</section>
-<section id="market" class="bg-light">
-  <div class="container">
-    <h2>Объём и структура рынка</h2>
-    <table class="table striped">
-      <thead><tr><th>Показатель</th><th>Оценка</th><th>Обоснование</th></tr></thead>
-      <tbody>
-        <tr><td>TAM</td><td>~1,0 трлн руб. в год</td><td>в арендном жилье 7–8 млн человек</td></tr>
-        <tr><td>SAM</td><td>~300–400 млрд руб. в год</td><td>молодёжь до 35 лет ~30% рынка</td></tr>
-        <tr><td>SOM</td><td>~1 млрд руб. GMV</td><td>целевой охват 0,25% SAM через 3 года</td></tr>
-      </tbody>
-    </table>
-    <p>Аудитория — студенты и молодые специалисты, которым нужно безопасно и выгодно снимать жильё в складчину.</p>
-  </div>
-</section>
-<section id="advantages">
-  <div class="container">
-    <h2>Конкурентные преимущества</h2>
-    <table class="table striped">
-      <thead><tr><th>Сервис</th><th>Безопасность</th><th>AI‑подбор</th><th>Репутация</th></tr></thead>
-      <tbody>
-        <tr><td>RoomMate</td><td>Проверка личности и escrow</td><td>Да</td><td>Встроенные рейтинги</td></tr>
-        <tr><td>Avito, соцсети</td><td>Нет системной проверки</td><td>Нет</td><td>Отзывы без контроля</td></tr>
-        <tr><td>Зарубежные apps</td><td>Не адаптированы к РФ</td><td>Частично</td><td>Нет поддержки госуслуг</td></tr>
-      </tbody>
-    </table>
-    <ul class="mt-3">
-      <li>Безопасная среда и доверие пользователей.</li>
-      <li>Алгоритмы совместимости на основе данных.</li>
-      <li>Удобный полный цикл от поиска до оплаты.</li>
-      <li>Поддержка молодёжи и сотрудничество с вузами.</li>
-    </ul>
-  </div>
-</section>
-<section id="monetization" class="bg-light">
-  <div class="container">
-    <h2>Монетизация</h2>
-    <ul>
-      <li>Freemium‑подписка RoomMate Plus.</li>
-      <li>Комиссия с наймодателей и корпоративных партнёров.</li>
-      <li>Рекламные размещения для целевой аудитории.</li>
-      <li>Комиссия с платежей и дополнительные услуги.</li>
-    </ul>
-    <p class="mb-0">Старт бесплатный, доход формируют премиум‑опции и сервисные комиссии.</p>
-  </div>
-</section>
-<section id="tech">
-  <div class="container">
-    <h2>Техническое решение</h2>
-    <p>Архитектура клиент‑сервер с облачным бэкендом и AI‑модулем matching.</p>
-    <table class="table striped">
-      <thead><tr><th>Сфера</th><th>Технологии</th></tr></thead>
-      <tbody>
-        <tr><td>Backend</td><td>Python/Django или Node.js, PostgreSQL</td></tr>
-        <tr><td>Frontend</td><td>React/Vue, PWA, React&nbsp;Native</td></tr>
-        <tr><td>AI‑подбор</td><td>scikit‑learn, PyTorch</td></tr>
-        <tr><td>Верификация</td><td>ЕСИА, liveness SDK</td></tr>
-        <tr><td>Платежи</td><td>ЮKassa, escrow‑механизм</td></tr>
-      </tbody>
-    </table>
-    <p>Такой стек дёшево разворачивается, масштабируется и легко поддерживается.</p>
-  </div>
-</section>
-<section id="team" class="bg-light">
-  <div class="container">
-    <h2>Команда</h2>
-    <table class="table striped">
-      <thead><tr><th>Роль</th><th>Задачи</th></tr></thead>
-      <tbody>
-        <tr><td>Руководитель</td><td>координация, аналитика, связи с партнёрами</td></tr>
-        <tr><td>Разработчик</td><td>backend и frontend платформы</td></tr>
-        <tr><td>ML‑специалист</td><td>алгоритм совместимости</td></tr>
-        <tr><td>Дизайнер</td><td>UX/UI и брендирование</td></tr>
-        <tr><td>Маркетолог</td><td>SMM и привлечение аудитории</td></tr>
-        <tr><td>Юрист</td><td>договора и правовые вопросы</td></tr>
-      </tbody>
-    </table>
-    <p>Привлекаем молодых специалистов и мотивируем долей в стартапе и гибким графиком.</p>
-  </div>
-</section>
-<section id="roadmap">
-  <div class="container">
-    <h2>План реализации</h2>
-    <table class="table striped">
-      <thead><tr><th>Этап</th><th>Срок</th><th>Ключевые результаты</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td>1 месяц</td><td>ТЗ, запуск разработки, базовые функции</td></tr>
-        <tr><td>2</td><td>11 месяцев</td><td>Полный функционал, пилот, релиз 1.0</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-<section id="contacts" class="bg-light">
-  <div class="container text-center">
-    <h2>Контакты</h2>
-    <p>RoomMate Team</p>
-    <p>Email: info@example.com</p>
-    <a href="#" class="btn btn-primary">Связаться с нами</a>
-  </div>
-</section>
-<footer class="bg-dark-purple text-center py-3">
-  <div class="container">
-    <small>&copy; 2024 RoomMate</small>
-  </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <header>
+        <h1>Welcome to My Beautiful Site</h1>
+    </header>
+    <main>
+        <p>This is a simple but beautiful HTML website. You can add more content here to showcase your work or provide information.</p>
+    </main>
+    <footer>
+        &copy; 2024 My Beautiful Site
+    </footer>
 </body>
 </html>
